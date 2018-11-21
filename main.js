@@ -2,8 +2,16 @@ const cardContainer = document.querySelector('.card-container')
 const clickCounter = document.querySelector('.click-counter')
 const topHeader = document.querySelector('.top-header')
 const resetButton = document.querySelector('.reset-button')
+const levels = [...document.querySelectorAll('button')]
+const easy = document.querySelector('.easy-button')
+const medium = document.querySelector('.medium-button')
+const hard = document.querySelector('.hard-button')
+const redonk = document.querySelector('.redonk-button')
 
-let arrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+let easyArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+let mediumArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12]
+let hardArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
+let redonkArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
 
 let counter = 0
 let tries = 0
@@ -14,7 +22,7 @@ function generateRandomNumb(array) {
 	let numLeft = array.length
 	let trade
 	let currIndex
-
+	
 	while(numLeft) {
 		// Pick a remaining number from the array
 		currIndex = Math.floor(Math.random() * numLeft--)
@@ -24,9 +32,16 @@ function generateRandomNumb(array) {
 		array[currIndex] = trade
 	}
 	return array
-}
+	}
 
-let sortedArr = generateRandomNumb(arrayOfCards)
+let sortedArr = generateRandomNumb(easyArrayOfCards)
+	
+
+// ***TODO*** IMPLEMENT LEVEL LOGIC
+// medium.addEventListener('click', () => {
+// 	sortedArr = generateRandomNumb(mediumArrayOfCards)
+// })
+
 
 const assignValuesToCards = (array) => {
 	array.forEach((num) => {
@@ -69,20 +84,26 @@ let childNodes = [...cardContainer.childNodes]
 // Init click handler function on the parent element so it saves after we remove the child nodes during reset of the game.
 const clickHandler = (e) => {
 	if(e.target.matches('.card')) {
+
 		topHeader.textContent = 'Pick another card..'
 		e.target.textContent = e.target.dataset.value
 		pickedCards.push(parseInt(e.target.dataset.value))
+
 		console.log(pickedCards, 'picked cards')
+
 		++counter
 		++tries
 		clickCounter.textContent = `You have clicked ${tries} times.`
+
 		if(counter == 2 && !cardsMatch(pickedCards)) {
 			topHeader.textContent = 'Seriously?'
 			setTimeout(() => {
 				clearCards(childNodes)
 				counter = 0
-			}, 500);
-		} else if(cardsMatch(pickedCards)) {
+			}, 500)
+		}
+		else if(cardsMatch(pickedCards)) {
+
 			topHeader.textContent = 'Well done!'
 			setTimeout(() => {
 				matchedPairs.unshift(pickedCards)
@@ -93,6 +114,7 @@ const clickHandler = (e) => {
 				clearCards(childNodes)
 				counter = 0
 			}, 500)
+
 			if(childNodes.length <= 2) {
 				setTimeout(() => {
 					topHeader.textContent = 'You win!!'
@@ -111,16 +133,21 @@ resetButton.addEventListener('click', () => {
 })
 
 const resetGame = () => {
+
 	while(cardContainer.firstChild){
 		cardContainer.removeChild(cardContainer.childNodes[0])
 	}
+
 	counter = 0
 	tries = 0
+
 	if(pickedCards.length > 0) pickedCards.shift()
+
 	if(matchedPairs.length > 0) {
 		matchedPairs[0].splice(0, matchedPairs[0].length)
 		matchedPairs.shift()
 	}
+
 	topHeader.textContent = 'Game was reset.'
 	clickCounter.textContent = 'Pick a card to start the counter'
 	sortedArr = generateRandomNumb(arrayOfCards)

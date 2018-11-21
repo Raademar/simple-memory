@@ -15,19 +15,19 @@ body {
 }
 .card-container {
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
 	align-content: center;
 	flex-wrap: wrap;
 	width: 90%;
-	max-width: 1200px;
+	max-width: 1425px;
 	margin: 0;
 }
 .card {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 120px;
-	height: 200px;
+	width: 8vw;
+	height: 12vh;
 	margin: 10px;
 	border: 2px solid black;
 	background: orange;
