@@ -1,4 +1,6 @@
 const cardContainer = document.querySelector('.card-container')
+const clickCounter = document.querySelector('.click-counter')
+const topHeader = document.querySelector('.top-header')
 
 arrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
 
@@ -56,31 +58,43 @@ const removeMatches = (arr) => {
 }
 
 let counter = 0
+let tries = 0
 let pickedCards = []
 const matchedPairs = []
 
 cards.forEach((card) => {
 	card.dataset.value = parseInt(card.dataset.value)
 	card.addEventListener('click', () => {
+		topHeader.textContent = 'Pick another card..'
 		card.textContent = card.dataset.value
 		pickedCards.push(parseInt(card.dataset.value))
 		++counter
+		++tries
+		clickCounter.textContent = `You have clicked ${tries} times.`
 		if(counter == 2 && !cardsMatch(pickedCards)) {
+			topHeader.textContent = 'Seriously?'
 			console.log(pickedCards)
 			setTimeout(() => {
 				clearCards(cards)
 				counter = 0
 			}, 500);
 		} else if(cardsMatch(pickedCards)) {
+			topHeader.textContent = 'Well done!'
 			setTimeout(() => {
 				matchedPairs.unshift(pickedCards)
 				console.log(matchedPairs)
+				// We run the function twice to remove both cards in the matching pair from our main array.
 				removeMatches(cards)
 				removeMatches(cards)
 				clearCards(cards)
 				counter = 0
 				cards.forEach(card => console.log(card))
-			}, 500);
+			}, 500)
+			if(cards.length <= 2) {
+				setTimeout(() => {
+					topHeader.textContent = 'You win!!'
+				}, 500)
+			}
 		}
 	})
 })
