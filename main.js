@@ -1,8 +1,14 @@
 const cardContainer = document.querySelector('.card-container')
 const clickCounter = document.querySelector('.click-counter')
 const topHeader = document.querySelector('.top-header')
+const resetButton = document.querySelector('.reset-button')
 
-arrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+let arrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+
+let counter = 0
+let tries = 0
+let pickedCards = []
+const matchedPairs = []
 
 function generateRandomNumb(array) {
 	let numLeft = array.length
@@ -20,7 +26,7 @@ function generateRandomNumb(array) {
 	return array
 }
 
-const sortedArr = generateRandomNumb(arrayOfCards)
+let sortedArr = generateRandomNumb(arrayOfCards)
 
 const assignValuesToCards = (array) => {
 	array.forEach((num) => {
@@ -30,9 +36,10 @@ const assignValuesToCards = (array) => {
 		cardContainer.appendChild(card)
 	})
 }
+
 assignValuesToCards(sortedArr)
 
-const cards = [...document.querySelectorAll('.card')]
+let cards = [...document.querySelectorAll('.card')]
 
 // Function for clearing cards when the click counter is two.
 const clearCards = (arr) => {
@@ -57,44 +64,66 @@ const removeMatches = (arr) => {
 	return arr
 }
 
-let counter = 0
-let tries = 0
-let pickedCards = []
-const matchedPairs = []
+let childNodes = [...cardContainer.childNodes]
 
-cards.forEach((card) => {
-	card.dataset.value = parseInt(card.dataset.value)
-	card.addEventListener('click', () => {
+// Init click handler function on the parent element so it saves after we remove the child nodes during reset of the game.
+const clickHandler = (e) => {
+	if(e.target.matches('.card')) {
 		topHeader.textContent = 'Pick another card..'
-		card.textContent = card.dataset.value
-		pickedCards.push(parseInt(card.dataset.value))
+		e.target.textContent = e.target.dataset.value
+		pickedCards.push(parseInt(e.target.dataset.value))
+		console.log(pickedCards, 'picked cards')
 		++counter
 		++tries
 		clickCounter.textContent = `You have clicked ${tries} times.`
 		if(counter == 2 && !cardsMatch(pickedCards)) {
 			topHeader.textContent = 'Seriously?'
-			console.log(pickedCards)
 			setTimeout(() => {
-				clearCards(cards)
+				clearCards(childNodes)
 				counter = 0
 			}, 500);
 		} else if(cardsMatch(pickedCards)) {
 			topHeader.textContent = 'Well done!'
 			setTimeout(() => {
 				matchedPairs.unshift(pickedCards)
-				console.log(matchedPairs)
+				console.log(matchedPairs, 'matched pairs')
 				// We run the function twice to remove both cards in the matching pair from our main array.
-				removeMatches(cards)
-				removeMatches(cards)
-				clearCards(cards)
+				removeMatches(childNodes)
+				removeMatches(childNodes)
+				clearCards(childNodes)
 				counter = 0
-				cards.forEach(card => console.log(card))
 			}, 500)
-			if(cards.length <= 2) {
+			if(childNodes.length <= 2) {
 				setTimeout(() => {
 					topHeader.textContent = 'You win!!'
 				}, 500)
 			}
 		}
-	})
+	}
+}
+
+// Assign click handler to the parent element.
+cardContainer.addEventListener('click', clickHandler)
+
+resetButton.addEventListener('click', () => {
+	resetGame()
+	console.log('reset was here')
 })
+
+const resetGame = () => {
+	while(cardContainer.firstChild){
+		cardContainer.removeChild(cardContainer.childNodes[0])
+	}
+	counter = 0
+	tries = 0
+	if(pickedCards.length > 0) pickedCards.shift()
+	if(matchedPairs.length > 0) {
+		matchedPairs[0].splice(0, matchedPairs[0].length)
+		matchedPairs.shift()
+	}
+	topHeader.textContent = 'Game was reset.'
+	clickCounter.textContent = 'Pick a card to start the counter'
+	sortedArr = generateRandomNumb(arrayOfCards)
+	assignValuesToCards(sortedArr)
+	clearCards(childNodes)
+}
