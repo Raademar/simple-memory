@@ -58,7 +58,9 @@ let cards = [...document.querySelectorAll('.card')]
 
 // Function for clearing cards when the click counter is two.
 const clearCards = (arr) => {
+	console.log('started clearing')
 	arr.forEach(item => item.textContent = '')
+	console.log('finished clearing')
 	pickedCards = []
 }
 
@@ -79,7 +81,7 @@ const removeMatches = (arr) => {
 	return arr
 }
 
-let childNodes = [...cardContainer.childNodes]
+let childNodes = [...document.querySelectorAll('.card-container > div')]
 
 // Init click handler function on the parent element so it saves after we remove the child nodes during reset of the game.
 const clickHandler = (e) => {
@@ -127,11 +129,6 @@ const clickHandler = (e) => {
 // Assign click handler to the parent element.
 cardContainer.addEventListener('click', clickHandler)
 
-resetButton.addEventListener('click', () => {
-	resetGame()
-	console.log('reset was here')
-})
-
 const resetGame = () => {
 
 	while(cardContainer.firstChild){
@@ -150,7 +147,15 @@ const resetGame = () => {
 
 	topHeader.textContent = 'Game was reset.'
 	clickCounter.textContent = 'Pick a card to start the counter'
-	sortedArr = generateRandomNumb(arrayOfCards)
+	sortedArr = generateRandomNumb(mediumArrayOfCards)
 	assignValuesToCards(sortedArr)
 	clearCards(childNodes)
 }
+
+resetButton.addEventListener('click', () => {
+	resetGame()
+	console.log('reset was here')
+	childNodes = [...document.querySelectorAll('.card-container > div')]
+})
+
+
