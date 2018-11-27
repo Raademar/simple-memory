@@ -1,5 +1,6 @@
 const body = document.body
 const cardContainer = document.querySelector('.card-container')
+const goblin = document.querySelector('.goblin')
 const clickCounter = document.querySelector('.click-counter')
 const topHeader = document.querySelector('.top-header')
 const resetButton = document.querySelector('.reset-button')
@@ -10,7 +11,6 @@ const easy = document.querySelector('.easy-button')
 const medium = document.querySelector('.medium-button')
 const hard = document.querySelector('.hard-button')
 const redonk = document.querySelector('.redonk-button')
-
 let easyArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
 let mediumArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12]
 let hardArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
@@ -86,15 +86,19 @@ const redonkRandomizer = (arr) => {
 	let rand = Math.floor((Math.random() * arr.length ) + 0)
 	generateRandomNumb(arr)
 	arr.forEach((num) => {
-		let cards = [...cardContainer.querySelectorAll('.card')]
-		cards[rand].dataset.value = num.dataset.value
+		const newNum = arr[rand].dataset.value;
+		const replaceNum = num.dataset.value;
+
+		num.dataset.value = newNum;
+		arr[rand].dataset.value = replaceNum;
+
 		
 	})
 	const gnome = new Audio('gnome.mp3')
-	cardContainer.classList.add('goblin')
+	goblin.classList.add('visible')
 	gnome.play()
 	setTimeout(() => {
-		cardContainer.classList.remove('goblin')
+		goblin.classList.remove('visible')
 	}, 2500)
 }
 
@@ -193,6 +197,7 @@ redonk.addEventListener('click', () => {
 	initGame(redonkArrayOfCards)
 	body.classList.add('redonk-bg')
 	topHeader.style.color = 'lime'
+	clickCounter.style.color = 'lime'
 
 	setInterval(() => {
 		redonkRandomizer(childNodes)
