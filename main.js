@@ -38,9 +38,12 @@ let sortedArr = generateRandomNumb(easyArrayOfCards)
 	
 
 // ***TODO*** IMPLEMENT LEVEL LOGIC
-// medium.addEventListener('click', () => {
-// 	sortedArr = generateRandomNumb(mediumArrayOfCards)
-// })
+
+// ***REDONK MODE ***
+
+
+
+// ******************
 
 
 const assignValuesToCards = (array) => {
@@ -58,9 +61,7 @@ let cards = [...document.querySelectorAll('.card')]
 
 // Function for clearing cards when the click counter is two.
 const clearCards = (arr) => {
-	console.log('started clearing')
 	arr.forEach(item => item.textContent = '')
-	console.log('finished clearing')
 	pickedCards = []
 }
 
@@ -91,8 +92,6 @@ const clickHandler = (e) => {
 		e.target.textContent = e.target.dataset.value
 		pickedCards.push(parseInt(e.target.dataset.value))
 
-		console.log(pickedCards, 'picked cards')
-
 		++counter
 		++tries
 		clickCounter.textContent = `You have clicked ${tries} times.`
@@ -109,7 +108,6 @@ const clickHandler = (e) => {
 			topHeader.textContent = 'Well done!'
 			setTimeout(() => {
 				matchedPairs.unshift(pickedCards)
-				console.log(matchedPairs, 'matched pairs')
 				// We run the function twice to remove both cards in the matching pair from our main array.
 				removeMatches(childNodes)
 				removeMatches(childNodes)
@@ -129,6 +127,7 @@ const clickHandler = (e) => {
 // Assign click handler to the parent element.
 cardContainer.addEventListener('click', clickHandler)
 
+// Function for resetting the game
 const resetGame = () => {
 
 	while(cardContainer.firstChild){
@@ -154,7 +153,7 @@ const resetGame = () => {
 
 resetButton.addEventListener('click', () => {
 	resetGame()
-	console.log('reset was here')
+	// Reassign the nodes again.
 	childNodes = [...document.querySelectorAll('.card-container > div')]
 })
 
