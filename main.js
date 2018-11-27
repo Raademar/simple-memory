@@ -1,6 +1,7 @@
 const body = document.body
 const cardContainer = document.querySelector('.card-container')
 const goblin = document.querySelector('.goblin')
+const win = document.querySelector('.win')
 const clickCounter = document.querySelector('.click-counter')
 const topHeader = document.querySelector('.top-header')
 const resetButton = document.querySelector('.reset-button')
@@ -39,18 +40,6 @@ function generateRandomNumb(array) {
 	return array
 	}
 
-
-	
-
-// ***TODO*** IMPLEMENT LEVEL LOGIC
-
-// ***REDONK MODE ***
-
-
-
-// ******************
-
-
 const assignValuesToCards = (array) => {
 	array.forEach((num) => {
 		let card = document.createElement('div')
@@ -59,7 +48,6 @@ const assignValuesToCards = (array) => {
 		cardContainer.appendChild(card)
 	})
 }
-
 
 // Function for clearing cards when the click counter is two.
 const clearCards = (arr) => {
@@ -143,8 +131,12 @@ const clickHandler = (e) => {
 
 			if(childNodes.length <= 2) {
 				setTimeout(() => {
+					win.style.display = 'block'
 					topHeader.textContent = 'You win!!'
 				}, 500)
+				setTimeout(() => {
+					win.style.display = 'none'
+				}, 5000 )
 			}
 		}
 		previousTarget = e.target
@@ -205,7 +197,7 @@ hard.addEventListener('click', () => {
 redonk.addEventListener('click', () => {
 	initGame(redonkArrayOfCards)
 	const nyan = new Audio('nyan.mp3')
-	nyan.play()
+	nyan.play().loop = true
 	body.classList.add('redonk-bg')
 	topHeader.style.color = 'lime'
 	clickCounter.style.color = 'lime'

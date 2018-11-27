@@ -123,6 +123,20 @@ body {
 	display: block;
 }
 
+.win {
+	display: none;
+	background: url('https://media1.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif?cid=3640f6095bfd2b9a464f337377cb96da');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 999;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 @media screen and (min-width: 1280px) {
 	.card-container {
 		display: flex;
