@@ -101,3 +101,27 @@ body {
 	background: linear-gradient(to right, rgba(173,0,0,1) 0%, rgba(173,0,0,1) 19%, rgba(143,0,0,1) 44%, rgba(107,0,0,1) 76%, rgba(107,0,0,1) 79%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad0000', endColorstr='#6b0000', GradientType=1 );
 }
+.redonk-bg {
+	background: url('https://i.giphy.com/media/2dnGHOAQt1tIziib5X/giphy.webp');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.goblin {
+	background: url('goblin.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 999;
+}
+
+@media screen and (min-width: 1280px) {
+	.card-container {
+		display: flex;
+		justify-content: flex-start;
+		align-content: center;
+		flex-wrap: wrap;
+		width: 100%;
+		max-width: 1060px;
+		margin: 0;
+	}
+}

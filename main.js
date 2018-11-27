@@ -1,7 +1,10 @@
+const body = document.body
 const cardContainer = document.querySelector('.card-container')
 const clickCounter = document.querySelector('.click-counter')
 const topHeader = document.querySelector('.top-header')
 const resetButton = document.querySelector('.reset-button')
+let childNodes
+let sortedArr
 const levels = [...document.querySelectorAll('button')]
 const easy = document.querySelector('.easy-button')
 const medium = document.querySelector('.medium-button')
@@ -34,7 +37,7 @@ function generateRandomNumb(array) {
 	return array
 	}
 
-let sortedArr = generateRandomNumb(easyArrayOfCards)
+
 	
 
 // ***TODO*** IMPLEMENT LEVEL LOGIC
@@ -55,9 +58,6 @@ const assignValuesToCards = (array) => {
 	})
 }
 
-assignValuesToCards(sortedArr)
-
-let cards = [...document.querySelectorAll('.card')]
 
 // Function for clearing cards when the click counter is two.
 const clearCards = (arr) => {
@@ -82,18 +82,32 @@ const removeMatches = (arr) => {
 	return arr
 }
 
-let childNodes = [...document.querySelectorAll('.card-container > div')]
+const redonkRandomizer = (arr) => {
+	let rand = Math.floor((Math.random() * arr.length ) + 0)
+	generateRandomNumb(arr)
+	arr.forEach((num) => {
+		let cards = [...cardContainer.querySelectorAll('.card')]
+		cards[rand].dataset.value = num.dataset.value
+		
+	})
+	const gnome = new Audio('gnome.mp3')
+	cardContainer.classList.add('goblin')
+	gnome.play()
+	setTimeout(() => {
+		cardContainer.classList.remove('goblin')
+	}, 2500)
+}
 
 // Init click handler function on the parent element so it saves after we remove the child nodes during reset of the game.
 const clickHandler = (e) => {
 	if(e.target.matches('.card')) {
 
+		++counter
+		++tries
 		topHeader.textContent = 'Pick another card..'
 		e.target.textContent = e.target.dataset.value
 		pickedCards.push(parseInt(e.target.dataset.value))
-
-		++counter
-		++tries
+	
 		clickCounter.textContent = `You have clicked ${tries} times.`
 
 		if(counter == 2 && !cardsMatch(pickedCards)) {
@@ -157,4 +171,34 @@ resetButton.addEventListener('click', () => {
 	childNodes = [...document.querySelectorAll('.card-container > div')]
 })
 
+
+const initGame = (pickedLevel) => {
+	sortedArr = generateRandomNumb(pickedLevel)
+	assignValuesToCards(sortedArr)
+	childNodes = [...document.querySelectorAll('.card-container > div')]
+	clickCounter.textContent = "Let's play!"
+}
+
+
+easy.addEventListener('click', () => {
+	initGame(easyArrayOfCards)
+})
+medium.addEventListener('click', () => {
+	initGame(mediumArrayOfCards)
+})
+hard.addEventListener('click', () => {
+	initGame(hardArrayOfCards)
+})
+redonk.addEventListener('click', () => {
+	initGame(redonkArrayOfCards)
+	body.classList.add('redonk-bg')
+	topHeader.style.color = 'lime'
+
+	setInterval(() => {
+		redonkRandomizer(childNodes)
+	}, 10000)
+	setInterval(() => {
+		generateRandomNumb(sortedArr)
+	}, 120000);
+})
 
