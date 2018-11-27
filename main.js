@@ -15,9 +15,11 @@ let easyArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
 let mediumArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12]
 let hardArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
 let redonkArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
+const redonkColorArray = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#f1c40f', '#e67e22', '#e74c3c']
 
 let counter = 0
 let tries = 0
+let previousTarget = 0
 let pickedCards = []
 const matchedPairs = []
 
@@ -82,17 +84,17 @@ const removeMatches = (arr) => {
 	return arr
 }
 
+// Shuffle the values of the cards in live game.
 const redonkRandomizer = (arr) => {
 	let rand = Math.floor((Math.random() * arr.length ) + 0)
 	generateRandomNumb(arr)
-	arr.forEach((num) => {
+	arr.forEach((card) => {
 		const newNum = arr[rand].dataset.value;
-		const replaceNum = num.dataset.value;
-
-		num.dataset.value = newNum;
+		const replaceNum = card.dataset.value;
+		// Swap values of cards.
+		card.dataset.value = newNum;
 		arr[rand].dataset.value = replaceNum;
 
-		
 	})
 	const gnome = new Audio('gnome.mp3')
 	goblin.classList.add('visible')
@@ -102,9 +104,15 @@ const redonkRandomizer = (arr) => {
 	}, 2500)
 }
 
+const redonkColorSwitch = (arr, colorArr) => {
+	let rand = Math.floor((Math.random() * arr.length ) + 0)
+	let colorRand = Math.floor((Math.random() * colorArr.length ) + 0)
+	arr[rand].style.background = colorArr[colorRand]
+}
+
 // Init click handler function on the parent element so it saves after we remove the child nodes during reset of the game.
 const clickHandler = (e) => {
-	if(e.target.matches('.card')) {
+	if(e.target.matches('.card') && counter < 2 && previousTarget != e.target) {
 
 		++counter
 		++tries
@@ -139,6 +147,7 @@ const clickHandler = (e) => {
 				}, 500)
 			}
 		}
+		previousTarget = e.target
 	}
 }
 
@@ -195,15 +204,19 @@ hard.addEventListener('click', () => {
 })
 redonk.addEventListener('click', () => {
 	initGame(redonkArrayOfCards)
+	const nyan = new Audio('nyan.mp3')
+	nyan.play()
 	body.classList.add('redonk-bg')
 	topHeader.style.color = 'lime'
 	clickCounter.style.color = 'lime'
-
+	setInterval(() => {
+		redonkColorSwitch(childNodes, redonkColorArray)
+	}, 10);
 	setInterval(() => {
 		redonkRandomizer(childNodes)
-	}, 10000)
+	}, 20000)
 	setInterval(() => {
-		generateRandomNumb(sortedArr)
+		redonkRandomizer(childNodes)
 	}, 120000);
 })
 
