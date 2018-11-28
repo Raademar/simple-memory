@@ -38,6 +38,9 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.render('index')
 })
+app.get('/highscore', (req, res) => {
+  res.render('highscore')
+})
 
 let Highscore = require('./db/highscore')
 app.post('/db', (req, res) => {

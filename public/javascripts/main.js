@@ -252,10 +252,10 @@ const saveNewHighscore = (player, score) => {
 	let userData = {
     player: player,
     score: score
-  }
+	}
   return fetch('/db', {
 		method: 'POST',
-		mode: "no-cors",
+		mode: "cors",
     body: JSON.stringify(userData),
     headers: {
       'Accept': 'application/json',
