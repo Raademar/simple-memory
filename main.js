@@ -7,11 +7,13 @@ const topHeader = document.querySelector('.top-header')
 const resetButton = document.querySelector('.reset-button')
 let childNodes
 let sortedArr
+let userPickedLevel
 const levels = [...document.querySelectorAll('button')]
 const easy = document.querySelector('.easy-button')
 const medium = document.querySelector('.medium-button')
 const hard = document.querySelector('.hard-button')
 const redonk = document.querySelector('.redonk-button')
+const home = document.querySelector('.home-button')
 let easyArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
 let mediumArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12]
 let hardArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
@@ -147,7 +149,7 @@ const clickHandler = (e) => {
 cardContainer.addEventListener('click', clickHandler)
 
 // Function for resetting the game
-const resetGame = () => {
+const resetGame = (pickedLevel) => {
 
 	while(cardContainer.firstChild){
 		cardContainer.removeChild(cardContainer.childNodes[0])
@@ -165,20 +167,24 @@ const resetGame = () => {
 
 	topHeader.textContent = 'Game was reset.'
 	clickCounter.textContent = 'Pick a card to start the counter'
-	sortedArr = generateRandomNumb(mediumArrayOfCards)
+	sortedArr = generateRandomNumb(pickedLevel)
 	assignValuesToCards(sortedArr)
 	clearCards(childNodes)
 }
 
 resetButton.addEventListener('click', () => {
-	resetGame()
+	resetGame(userPickedLevel)
 	// Reassign the nodes again.
 	childNodes = [...document.querySelectorAll('.card-container > div')]
 })
 
+home.addEventListener('click', () => {
+	window.location.reload()
+})
 
 const initGame = (pickedLevel) => {
 	sortedArr = generateRandomNumb(pickedLevel)
+	userPickedLevel = pickedLevel
 	assignValuesToCards(sortedArr)
 	childNodes = [...document.querySelectorAll('.card-container > div')]
 	clickCounter.textContent = "Let's play!"
@@ -187,15 +193,39 @@ const initGame = (pickedLevel) => {
 
 easy.addEventListener('click', () => {
 	initGame(easyArrayOfCards)
+	levels[0].style.display = 'block';
+	levels[1].style.display = 'none';
+	levels[2].style.display = 'none';
+	levels[3].style.display = 'none';
+	levels[4].style.display = 'none';
+	levels[5].style.display = 'block';
 })
 medium.addEventListener('click', () => {
 	initGame(mediumArrayOfCards)
+	levels[0].style.display = 'block';
+	levels[1].style.display = 'none';
+	levels[2].style.display = 'none';
+	levels[3].style.display = 'none';
+	levels[4].style.display = 'none';
+	levels[5].style.display = 'block';
 })
 hard.addEventListener('click', () => {
 	initGame(hardArrayOfCards)
+	levels[0].style.display = 'block';
+	levels[1].style.display = 'none';
+	levels[2].style.display = 'none';
+	levels[3].style.display = 'none';
+	levels[4].style.display = 'none';
+	levels[5].style.display = 'block';
 })
 redonk.addEventListener('click', () => {
 	initGame(redonkArrayOfCards)
+	levels[0].style.display = 'block';
+	levels[1].style.display = 'none';
+	levels[2].style.display = 'none';
+	levels[3].style.display = 'none';
+	levels[4].style.display = 'none';
+	levels[5].style.display = 'block';
 	const nyan = new Audio('nyan.mp3')
 	nyan.play().loop = true
 	body.classList.add('redonk-bg')
@@ -209,6 +239,6 @@ redonk.addEventListener('click', () => {
 	}, 20000)
 	setInterval(() => {
 		redonkRandomizer(childNodes)
-	}, 120000);
+	}, 120000)
 })
 
