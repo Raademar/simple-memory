@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 // scoreSchema Schema
 let scoreSchema = mongoose.Schema({
-  author: {
+  player: {
     type: String,
     required: true,
   },
@@ -12,4 +12,4 @@ let scoreSchema = mongoose.Schema({
   }
 })
 
-let HighScore = module.exports = mongoose.model('HighScore', scoreSchema)
+let Highscore = module.exports = mongoose.model('Highscore', scoreSchema)

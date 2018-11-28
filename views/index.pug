@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(href='https://fonts.googleapis.com/css?family=Black+Han+Sans', rel='stylesheet')
+    style
+      include ../public/stylesheets/style.css
+    title Simpletons Simple Memory
+  body
+    .main-container
+      .text-container
+        h1.top-header Simpletons Simple Memory Game
+      .goblin
+      .win
+      .card-container
+      .button-container
+        button.reset-button.reset Reset Game
+        button.easy-button.easy(data-level='easyArrayOfCards') Easy
+        button.medium-button.medium(data-level='mediumArrayOfCards') Medium
+        button.hard-button.hard(data-level='hardArrayOfCards') Hard
+        button.redonk-button.redonk(data-level='redonkArrayOfCards') Freaking Redonk
+        button.home-button Go Home
+        button.save-button Save Highscore
+      .click-counter-container
+        h3.click-counter Pick a level to start the game
+    script
+      include ../public/javascripts/main.js

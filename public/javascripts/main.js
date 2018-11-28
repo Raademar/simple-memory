@@ -14,11 +14,14 @@ const medium = document.querySelector('.medium-button')
 const hard = document.querySelector('.hard-button')
 const redonk = document.querySelector('.redonk-button')
 const home = document.querySelector('.home-button')
+const saveHighScoreButton = document.querySelector('.save-button')
 let easyArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
 let mediumArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12]
 let hardArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
 let redonkArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
 const redonkColorArray = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#f1c40f', '#e67e22', '#e74c3c']
+
+const player = prompt('Enter your name!')
 
 let counter = 0
 let tries = 0
@@ -86,7 +89,7 @@ const redonkRandomizer = (arr) => {
 		arr[rand].dataset.value = replaceNum;
 
 	})
-	const gnome = new Audio('gnome.mp3')
+	const gnome = new Audio('../assets/gnome.mp3')
 	goblin.classList.add('visible')
 	gnome.play()
 	setTimeout(() => {
@@ -135,6 +138,7 @@ const clickHandler = (e) => {
 				setTimeout(() => {
 					win.style.display = 'block'
 					topHeader.textContent = 'You win!!'
+					saveHighScoreButton.style.display = 'block'
 				}, 500)
 				setTimeout(() => {
 					win.style.display = 'none'
@@ -226,7 +230,7 @@ redonk.addEventListener('click', () => {
 	levels[3].style.display = 'none';
 	levels[4].style.display = 'none';
 	levels[5].style.display = 'block';
-	const nyan = new Audio('nyan.mp3')
+	const nyan = new Audio('../assets/nyan.mp3')
 	nyan.play().loop = true
 	body.classList.add('redonk-bg')
 	topHeader.style.color = 'lime'
@@ -242,3 +246,25 @@ redonk.addEventListener('click', () => {
 	}, 120000)
 })
 
+
+
+const saveNewHighscore = (player, score) => {
+	let userData = {
+    player: player,
+    score: score
+  }
+  return fetch('/db', {
+		method: 'POST',
+		mode: "no-cors",
+    body: JSON.stringify(userData),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+	})
+	.then((response) => console.log(response))
+}
+
+saveHighScoreButton.addEventListener('click', () => {
+	saveNewHighscore(player, tries)
+})
