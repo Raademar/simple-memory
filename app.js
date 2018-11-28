@@ -24,4 +24,24 @@ db.on('error', (err) => {
 
 const app = express()
 
+app.get('/', (req, res) => {
+  res.send('hi')
+})
+
+let HighScore = require('./db/highscore')
+app.post('/db', (req, res) => {
+  let highScore = new HighScore({
+    player: req.playerName,
+    score: req.score  
+  })
+  highScore.save()
+  .then(response => {
+    console.log(`${response} saved to database`)
+  })
+  .catch(error => {
+    console.log(error, 'not working.. this far')
+    res.status(400).send('unable to save to database.')
+  })
+})
+
 app.listen(3000, () => console.log('listening on port 3000!'))
