@@ -1,0 +1,26 @@
+{
+  "name": "simple-memory",
+  "version": "1.0.0",
+  "description": "Memory game for our JS class at Yrgo.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raademar/simple-memory.git"
+  },
+  "author": "Mattias Rådemar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raademar/simple-memory/issues"
+  },
+  "homepage": "https://github.com/raademar/simple-memory#readme"
+}
