@@ -27,6 +27,8 @@ Train your brain
 ## This site has been tested by.
 
 * [André Broman](https://github.com/laykith)
+* [Per Baltzar](https://github.com/perbaltzar)
+* [Adrian Jungnelius](https://github.com/AdrianJung)
 
 ## License
 
