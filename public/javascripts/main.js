@@ -107,6 +107,9 @@ const redonkColorSwitch = (arr, colorArr) => {
 	let rand = Math.floor((Math.random() * arr.length ) + 0)
 	let colorRand = Math.floor((Math.random() * colorArr.length ) + 0)
 	arr[rand].style.background = colorArr[colorRand]
+	if(childNodes.length === 0) {
+		clearInterval(colorSwitchInterval)
+	}
 }
 
 // Init click handler function on the parent element so it saves after we remove the child nodes during reset of the game.
@@ -244,11 +247,9 @@ redonk.addEventListener('click', () => {
 	clickCounter.style.color = 'lime'
 
 	// This might bug out. COME BACK HERE!
-	while(childNodes.length > 0) {
-		setInterval(() => {
-			redonkColorSwitch(childNodes, redonkColorArray)
+	const colorSwitchInterval = setInterval(() => {
+		redonkColorSwitch(childNodes, redonkColorArray)
 		}, 10)
-	}
 	// ***********************************
 	setInterval(() => {
 		redonkRandomizer(childNodes)
@@ -257,6 +258,8 @@ redonk.addEventListener('click', () => {
 		redonkRandomizer(childNodes)
 	}, 120000)
 })
+
+
 
 
 
