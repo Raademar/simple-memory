@@ -49,6 +49,7 @@ const assignValuesToCards = (array) => {
 	array.forEach((num) => {
 		let card = document.createElement('div')
 		card.classList.add('card')
+		card.classList.add('unmatched-card')
 		card.dataset.value = num
 		cardContainer.appendChild(card)
 	})
@@ -69,10 +70,15 @@ const cardsMatch = (arr) => {
 	return false
 }
 
+// Here we loop throught each item in the given array.
+// Set the matched variable to the value the matched cards have.
+// We then splice the main array at the index of the matched card.
+// Will run it twice to remove both cards.
 const removeMatches = (arr) => {
 	let matched = arr.map(function(item) { 
 		return parseInt(item.dataset.value)
 	}).indexOf(matchedPairs[0][0])
+	arr[matched].classList.remove('unmatched-card')
 	arr.splice(matched, 1)
 	return arr
 }
@@ -105,7 +111,7 @@ const redonkColorSwitch = (arr, colorArr) => {
 
 // Init click handler function on the parent element so it saves after we remove the child nodes during reset of the game.
 const clickHandler = (e) => {
-	if(e.target.matches('.card') && counter < 2 && previousTarget != e.target) {
+	if(e.target.matches('.unmatched-card') && counter < 2 && previousTarget != e.target) {
 
 		++counter
 		++tries
@@ -132,6 +138,7 @@ const clickHandler = (e) => {
 				removeMatches(childNodes)
 				clearCards(childNodes)
 				counter = 0
+				pickedCardsClassList = []
 			}, 500)
 
 			if(childNodes.length <= 2) {
@@ -235,9 +242,14 @@ redonk.addEventListener('click', () => {
 	body.classList.add('redonk-bg')
 	topHeader.style.color = 'lime'
 	clickCounter.style.color = 'lime'
-	setInterval(() => {
-		redonkColorSwitch(childNodes, redonkColorArray)
-	}, 10);
+
+	// This might bug out. COME BACK HERE!
+	while(childNodes.length > 0) {
+		setInterval(() => {
+			redonkColorSwitch(childNodes, redonkColorArray)
+		}, 10)
+	}
+	// ***********************************
 	setInterval(() => {
 		redonkRandomizer(childNodes)
 	}, 20000)
