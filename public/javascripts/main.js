@@ -15,10 +15,12 @@ const hard = document.querySelector('.hard-button')
 const redonk = document.querySelector('.redonk-button')
 const home = document.querySelector('.home-button')
 const saveHighScoreButton = document.querySelector('.save-button')
-let easyArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
-let mediumArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12]
-let hardArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
-let redonkArrayOfCards = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
+const levelArrays = {
+	easy: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
+	medium: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12],
+	hard: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16],
+	redonk: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
+}
 const redonkColorArray = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#f1c40f', '#e67e22', '#e74c3c']
 
 const player = prompt('Enter your name!')
@@ -206,7 +208,7 @@ const initGame = (pickedLevel) => {
 
 
 easy.addEventListener('click', () => {
-	initGame(easyArrayOfCards)
+	initGame(levelArrays.easy)
 	levels[0].style.display = 'block';
 	levels[1].style.display = 'none';
 	levels[2].style.display = 'none';
@@ -215,7 +217,7 @@ easy.addEventListener('click', () => {
 	levels[5].style.display = 'block';
 })
 medium.addEventListener('click', () => {
-	initGame(mediumArrayOfCards)
+	initGame(levelArrays.medium)
 	levels[0].style.display = 'block';
 	levels[1].style.display = 'none';
 	levels[2].style.display = 'none';
@@ -224,7 +226,7 @@ medium.addEventListener('click', () => {
 	levels[5].style.display = 'block';
 })
 hard.addEventListener('click', () => {
-	initGame(hardArrayOfCards)
+	initGame(levelArrays.hard)
 	levels[0].style.display = 'block';
 	levels[1].style.display = 'none';
 	levels[2].style.display = 'none';
@@ -233,7 +235,7 @@ hard.addEventListener('click', () => {
 	levels[5].style.display = 'block';
 })
 redonk.addEventListener('click', () => {
-	initGame(redonkArrayOfCards)
+	initGame(levelArrays.redonk)
 	levels[0].style.display = 'block';
 	levels[1].style.display = 'none';
 	levels[2].style.display = 'none';
@@ -259,11 +261,7 @@ redonk.addEventListener('click', () => {
 	}, 120000)
 })
 
-
-
-
-
-const saveNewHighscore = (player, score) => {
+const saveNewPlayerHighscore = (player, score) => {
 	let userData = {
     player: player,
     score: score
@@ -281,5 +279,5 @@ const saveNewHighscore = (player, score) => {
 }
 
 saveHighScoreButton.addEventListener('click', () => {
-	saveNewHighscore(player, tries)
+	saveNewPlayerHighscore(player, tries)
 })

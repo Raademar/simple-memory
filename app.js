@@ -38,8 +38,28 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.render('index')
 })
-app.get('/highscore', (req, res) => {
-  res.render('highscore')
+
+
+async function getHighscores() {
+  const highscores = await Mood
+		.find({ player : player})
+		.populate('highscores', 'player')
+    .select('player score')
+  if(!highscores) {
+    console.log('No Moods registered.')
+  }
+  return highscores
+}
+
+app.get('/highscore', async(req, res) => {
+try {
+	let highscores = await getHighscores()
+	res.render('highscore', {
+		highscores: highscores
+	})
+} catch(err) {
+	res.send('No highscores found')
+	}
 })
 
 let Highscore = require('./db/highscore')
