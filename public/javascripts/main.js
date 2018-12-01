@@ -8,6 +8,7 @@ const resetButton = document.querySelector('.reset-button')
 let childNodes
 let sortedArr
 let userPickedLevel
+let colorSwitchInterval
 const levels = [...document.querySelectorAll('button')]
 const easy = document.querySelector('.easy-button')
 const medium = document.querySelector('.medium-button')
@@ -107,9 +108,10 @@ const redonkRandomizer = (arr) => {
 const redonkColorSwitch = (arr, colorArr) => {
 	let rand = Math.floor((Math.random() * arr.length ) + 0)
 	let colorRand = Math.floor((Math.random() * colorArr.length ) + 0)
-	arr[rand].style.background = colorArr[colorRand]
 	if(childNodes.length === 0) {
 		clearInterval(colorSwitchInterval)
+	} else {
+		arr[rand].style.background = colorArr[colorRand]
 	}
 }
 
@@ -249,7 +251,7 @@ redonk.addEventListener('click', () => {
 	clickCounter.style.color = 'lime'
 
 	// This might bug out. COME BACK HERE!
-	const colorSwitchInterval = setInterval(() => {
+	colorSwitchInterval = setInterval(() => {
 		redonkColorSwitch(childNodes, redonkColorArray)
 		}, 10)
 	// ***********************************
