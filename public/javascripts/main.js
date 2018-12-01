@@ -207,43 +207,33 @@ const initGame = (pickedLevel) => {
 	clickCounter.textContent = "Let's play!"
 }
 
+const swapButtons = (arr) => {
+	for (let i = 0; i < arr.length; i++) {
+		if(i === 0 || i === 5) {
+			arr[i].style.display = 'block'
+		} else {
+			arr[i].style.display = 'none'
+		}
+		
+	}
+}
 
 easy.addEventListener('click', () => {
 	initGame(levelArrays.easy)
-	levels[0].style.display = 'block';
-	levels[1].style.display = 'none';
-	levels[2].style.display = 'none';
-	levels[3].style.display = 'none';
-	levels[4].style.display = 'none';
-	levels[5].style.display = 'block';
+	swapButtons(levels)
 })
 medium.addEventListener('click', () => {
 	initGame(levelArrays.medium)
-	levels[0].style.display = 'block';
-	levels[1].style.display = 'none';
-	levels[2].style.display = 'none';
-	levels[3].style.display = 'none';
-	levels[4].style.display = 'none';
-	levels[5].style.display = 'block';
+	swapButtons(levels)
 })
 hard.addEventListener('click', () => {
 	initGame(levelArrays.hard)
-	levels[0].style.display = 'block';
-	levels[1].style.display = 'none';
-	levels[2].style.display = 'none';
-	levels[3].style.display = 'none';
-	levels[4].style.display = 'none';
-	levels[5].style.display = 'block';
+	swapButtons(levels)
 })
 redonk.addEventListener('click', () => {
 	const player = prompt('Enter your name!')
 	initGame(levelArrays.redonk)
-	levels[0].style.display = 'block';
-	levels[1].style.display = 'none';
-	levels[2].style.display = 'none';
-	levels[3].style.display = 'none';
-	levels[4].style.display = 'none';
-	levels[5].style.display = 'block';
+	swapButtons(levels)
 	const nyan = new Audio('../assets/nyan.mp3')
 	nyan.play().loop = true
 	body.classList.add('redonk-bg')
