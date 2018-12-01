@@ -14,7 +14,7 @@ Train your brain
 ```
 npm install --save
 ```
-* Highscores are saved to a live mlab database. You need to set up your own connectionstring in a .env file. 
+* Highscores are saved to a live mlab database. You need to set up your own connection string in a .env file. 
 It should look something like this.
 ```
 MONGOLAB_URI="mongodb://USERNAME:PASSOWRD@DATABASE.mlab.com:PORT/simple-memory"
@@ -32,7 +32,10 @@ node app.js
 ## Built With
 
 
-* [JavaScript](https:javascript.com) - Gotta love that vanilla.
+* [JavaScript](https://javascript.com)
+* [Node.js](https://nodejs.org)
+* [Mongoose](https://mongoosejs.com)
+* [Pugjs](https://pugjs.org)
 
 
 ## Authors
@@ -41,6 +44,7 @@ node app.js
 
 ## This site has been tested by.
 
+* [Hanna White](https://hannawhite.se)
 * [André Broman](https://github.com/laykith)
 * [Per Baltzar](https://github.com/perbaltzar)
 * [Adrian Jungnelius](https://github.com/AdrianJung)
