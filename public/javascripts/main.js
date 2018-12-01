@@ -23,7 +23,6 @@ const levelArrays = {
 }
 const redonkColorArray = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#f1c40f', '#e67e22', '#e74c3c']
 
-const player = prompt('Enter your name!')
 
 let counter = 0
 let tries = 0
@@ -235,6 +234,7 @@ hard.addEventListener('click', () => {
 	levels[5].style.display = 'block';
 })
 redonk.addEventListener('click', () => {
+	const player = prompt('Enter your name!')
 	initGame(levelArrays.redonk)
 	levels[0].style.display = 'block';
 	levels[1].style.display = 'none';
@@ -259,6 +259,9 @@ redonk.addEventListener('click', () => {
 	setInterval(() => {
 		redonkRandomizer(childNodes)
 	}, 120000)
+	saveHighScoreButton.addEventListener('click', () => {
+		saveNewPlayerHighscore(player, tries)
+	})
 })
 
 const saveNewPlayerHighscore = (player, score) => {
@@ -278,6 +281,4 @@ const saveNewPlayerHighscore = (player, score) => {
 	.then((response) => console.log(response))
 }
 
-saveHighScoreButton.addEventListener('click', () => {
-	saveNewPlayerHighscore(player, tries)
-})
+

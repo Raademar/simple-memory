@@ -39,12 +39,12 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
+let Highscore = require('./db/highscore')
 
 async function getHighscores() {
-  const highscores = await Mood
-		.find({ player : player})
-		.populate('highscores', 'player')
-    .select('player score')
+  const highscores = await Highscore
+    .find({})
+    .sort('score')
   if(!highscores) {
     console.log('No Moods registered.')
   }
@@ -62,7 +62,7 @@ try {
 	}
 })
 
-let Highscore = require('./db/highscore')
+
 app.post('/db', (req, res) => {
   let highScore = new Highscore({
     player: req.body.player,
