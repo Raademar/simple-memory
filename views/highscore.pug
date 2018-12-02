@@ -4,21 +4,13 @@ block content
 
   h1 Highscores
   .highscore-container
-    h2 Easy
-    table
-      thead
-        tr
-          th Name
-          th Score
-      tbody
-        tr
-          td
-            for item in highscores.easy
-              p= item.player
-          td
-            for item in highscores.easy
-              p= item.score
-    h2 Medium
+    ol
+      for item in highscores.easy
+        li(style='margin-right: 1px;')= item.player 
+          span= item.score
+
+
+
     table
       thead
         tr
@@ -32,7 +24,6 @@ block content
           td
             for item in highscores.medium
               p= item.score
-    h2 Hard
     table
       thead
         tr
@@ -46,7 +37,6 @@ block content
           td
             for item in highscores.hard
               p= item.score
-    h2 Redonk
     table
       thead
         tr

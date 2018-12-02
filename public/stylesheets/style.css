@@ -153,24 +153,24 @@ button:hover {
 /* HIGHSCORES */
 
 .highscore-container {
-	width: 100vw;
 	height: 50vh;
+	width: 100vw;
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-content: center;
+	flex-flow: row wrap;
 }
 .highscore-container table {
-	max-width: 15vw;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 }
-.highscore-container h2 {
+/* .highscore-container h2 {
 	align-self: flex-start;
 	margin-top: 15vh;
-}
+} */
 
 /* ********** */
 
