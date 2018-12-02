@@ -8,6 +8,7 @@ const resetButton = document.querySelector('.reset-button')
 let childNodes
 let sortedArr
 let userPickedLevel
+let activeLevelToSave
 let colorSwitchInterval
 const levels = [...document.querySelectorAll('button')]
 const easy = document.querySelector('.easy-button')
@@ -16,11 +17,19 @@ const hard = document.querySelector('.hard-button')
 const redonk = document.querySelector('.redonk-button')
 const home = document.querySelector('.home-button')
 const saveHighScoreButton = document.querySelector('.save-button')
-const levelArrays = {
-	easy: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
-	medium: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12],
-	hard: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16],
-	redonk: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
+const levelsObject = {
+	easy: {
+		array: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+	},
+	medium: {
+		array: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12]
+	},
+	hard: {
+		array: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
+	},
+	redonk: {
+		array: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16]
+	}
 }
 const redonkColorArray = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#f1c40f', '#e67e22', '#e74c3c']
 
@@ -30,6 +39,7 @@ let tries = 0
 let previousTarget = 0
 let pickedCards = []
 const matchedPairs = []
+const player = prompt('Enter your name!')
 
 function generateRandomNumb(array) {
 	let numLeft = array.length
@@ -219,20 +229,23 @@ const swapButtons = (arr) => {
 }
 
 easy.addEventListener('click', () => {
-	initGame(levelArrays.easy)
+	activeLevelToSave = 'easy'
+	initGame(levelsObject.easy.array)
 	swapButtons(levels)
 })
 medium.addEventListener('click', () => {
-	initGame(levelArrays.medium)
+	activeLevelToSave = 'medium'
+	initGame(levelsObject.medium.array)
 	swapButtons(levels)
 })
 hard.addEventListener('click', () => {
-	initGame(levelArrays.hard)
+	activeLevelToSave = 'hard'
+	initGame(levelsObject.hard.array)
 	swapButtons(levels)
 })
 redonk.addEventListener('click', () => {
-	const player = prompt('Enter your name!')
-	initGame(levelArrays.redonk)
+	activeLevelToSave = 'redonk'
+	initGame(levelsObject.redonk.array)
 	swapButtons(levels)
 	const nyan = new Audio('../assets/nyan.mp3')
 	nyan.play().loop = true
@@ -251,15 +264,13 @@ redonk.addEventListener('click', () => {
 	setInterval(() => {
 		redonkRandomizer(childNodes)
 	}, 120000)
-	saveHighScoreButton.addEventListener('click', () => {
-		saveNewPlayerHighscore(player, tries)
-	})
 })
 
-const saveNewPlayerHighscore = (player, score) => {
+const saveNewPlayerHighscore = (player, score, level) => {
 	let userData = {
     player: player,
-    score: score
+		score: score,
+		level: level
 	}
   return fetch('/db', {
 		method: 'POST',
@@ -273,4 +284,6 @@ const saveNewPlayerHighscore = (player, score) => {
 	.then((response) => console.log(response))
 }
 
-
+saveHighScoreButton.addEventListener('click', () => {
+	saveNewPlayerHighscore(player, tries, activeLevelToSave)
+})

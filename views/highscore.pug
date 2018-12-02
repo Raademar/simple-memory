@@ -2,8 +2,9 @@ extends layout
 
 block content
 
+  h1 Highscores
   .highscore-container
-    h2 Highscores
+    h2 Easy
     table
       thead
         tr
@@ -12,10 +13,52 @@ block content
       tbody
         tr
           td
-            for item in highscores
+            for item in highscores.easy
               p= item.player
           td
-            for item in highscores
+            for item in highscores.easy
               p= item.score
-    a(href="/")
-      button.home-button-highscore Go Home
+    h2 Medium
+    table
+      thead
+        tr
+          th Name
+          th Score
+      tbody
+        tr
+          td
+            for item in highscores.medium
+              p= item.player
+          td
+            for item in highscores.medium
+              p= item.score
+    h2 Hard
+    table
+      thead
+        tr
+          th Name
+          th Score
+      tbody
+        tr
+          td
+            for item in highscores.hard
+              p= item.player
+          td
+            for item in highscores.hard
+              p= item.score
+    h2 Redonk
+    table
+      thead
+        tr
+          th Name
+          th Score
+      tbody
+        tr
+          td
+            for item in highscores.redonk
+              p= item.player
+          td
+            for item in highscores.redonk
+              p= item.score
+  a(href="/")
+    button.home-button-highscore Go Home

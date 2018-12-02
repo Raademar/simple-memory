@@ -6,8 +6,12 @@ let scoreSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  score:{
+  score: {
     type: Number,
+    required: true,
+  },
+  level: {
+    type: String,
     required: true,
   }
 })

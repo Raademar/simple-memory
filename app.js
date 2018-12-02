@@ -41,21 +41,52 @@ app.get('/', (req, res) => {
 
 let Highscore = require('./db/highscore')
 
-async function getHighscores() {
-  const highscores = await Highscore
-    .find({})
+async function getEasyHighscores() {
+  const easyHighscores = await Highscore
+    .find({ level : 'easy' })
     .sort('score')
-  if(!highscores) {
+  if(!easyHighscores) {
     console.log('No Moods registered.')
   }
-  return highscores
+  return easyHighscores
+}
+async function getMediumHighscores() {
+  const mediumHighscores = await Highscore
+    .find({ level : 'medium' })
+    .sort('score')
+  if(!mediumHighscores) {
+    console.log('No Moods registered.')
+  }
+  return mediumHighscores
+}
+async function getHardHighscores() {
+  const hardHighscores = await Highscore
+    .find({ level : 'hard' })
+    .sort('score')
+  if(!hardHighscores) {
+    console.log('No Moods registered.')
+  }
+  return hardHighscores
+}
+async function getRedonkHighscores() {
+  const redonkHighscores = await Highscore
+    .find({ level : 'redonk' })
+    .sort('score')
+  if(!redonkHighscores) {
+    console.log('No Moods registered.')
+  }
+  return redonkHighscores
 }
 
 app.get('/highscore', async(req, res) => {
 try {
-	let highscores = await getHighscores()
+	let easyHighscores = await getEasyHighscores() || []
+	let mediumHighscores = await getMediumHighscores() || []
+	let hardHighscores = await getHardHighscores() || []
+  let redonkHighscores = await getRedonkHighscores() || []
 	res.render('highscore', {
-		highscores: highscores
+    highscores: {easy: easyHighscores, medium: mediumHighscores, hard: hardHighscores, redonk: redonkHighscores}
+  
 	})
 } catch(err) {
 	res.send('No highscores found')
@@ -66,7 +97,8 @@ try {
 app.post('/db', (req, res) => {
   let highScore = new Highscore({
     player: req.body.player,
-    score: req.body.score
+    score: req.body.score,
+    level: req.body.level
   })
   highScore.save()
   .then(response => {
