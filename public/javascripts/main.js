@@ -40,7 +40,7 @@ let tries = 0
 let previousTarget = 0
 let pickedCards = []
 const matchedPairs = []
-const player = prompt('Enter your name!')
+let player
 
 function generateRandomNumb(array) {
 	let numLeft = array.length
@@ -216,6 +216,7 @@ const initGame = (pickedLevel) => {
 	assignValuesToCards(sortedArr)
 	childNodes = [...document.querySelectorAll('.card-container > div')]
 	clickCounter.textContent = "Let's play!"
+	player = prompt('Enter your name!')
 }
 
 const swapButtons = (arr) => {

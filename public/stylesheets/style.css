@@ -19,7 +19,7 @@ body {
 	align-content: center;
 	flex-wrap: wrap;
 	width: 90%;
-	max-width: 1425px;
+	max-width: 1100px;
 	margin: 0;
 }
 .card {
@@ -33,6 +33,7 @@ body {
 	background: orange;
 	font-size: 3rem;
 	user-select: none;
+	-moz-user-select: -moz-none;
 	transition: .2s all ease-in-out;
 }
 
@@ -197,6 +198,30 @@ ol p {
 
 /* ********** */
 
+@media screen and (max-width: 740px) {
+	.card-container {
+		display: flex;
+		justify-content: flex-start;
+		align-content: center;
+		flex-wrap: wrap;
+		width: 95%;
+		max-width: 1100px;
+		margin: 0;
+	}
+	.card {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 8vw;
+		height: 5vh;
+		margin: 10px;
+		border: 2px solid black;
+		background: orange;
+		font-size: 1.2rem;
+		user-select: none;
+		transition: .2s all ease-in-out;
+	}
+}
 @media screen and (min-width: 1280px) {
 	.card-container {
 		display: flex;
@@ -204,17 +229,28 @@ ol p {
 		align-content: center;
 		flex-wrap: wrap;
 		width: 100%;
-		max-width: 1060px;
+		max-width: 1100px;
 		margin: 0;
 	}
 }
-@media screen and (min-width: 1680px) {
+@media screen and (min-width: 1410px) {
 	.card-container {
 		display: flex;
 		justify-content: flex-start;
 		align-content: center;
 		flex-wrap: wrap;
-		width: 100vw;
+		width: 100%;
+		max-width: 1150px;
+		margin: 0;
+	}
+}
+@media screen and (min-width: 1510px) {
+	.card-container {
+		display: flex;
+		justify-content: flex-start;
+		align-content: center;
+		flex-wrap: wrap;
+		width: 100%;
 		max-width: 1500px;
 		margin: 0;
 	}
