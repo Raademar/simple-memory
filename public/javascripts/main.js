@@ -285,13 +285,16 @@ const saveNewPlayerHighscore = (player, score, level) => {
 	.then(function(response) {
 		if(response.status >= 400) {
 			console.log('Something went wrong when saving you score to the database.')
-		}else {
-			return response.json()
-		}
+			highscoreMessage.style.display = 'flex'
+			highscoreMessage.style.background = 'tomato'
+			highscoreMessage.textContent = 'Something went wrong when saving you score to the database.'
+		} else {
+				return response.json()
+			}
 	})
 	.then(function(message) {
 		highscoreMessage.style.display = 'flex'
-		highscoreMessage.textContent = JSON.stringify(message.message)
+		highscoreMessage.textContent = JSON.stringify(message.successMessage)
 		setTimeout(() => {
 			highscoreMessage.style.display = 'none'
 		}, 2000)
