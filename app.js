@@ -106,13 +106,19 @@ app.post('/db', (req, res) => {
   })
   highScore.save()
   .then(response => {
-    console.log(`${response} saved to database`)
-    res.send(response)
+		console.log(response)
+		let success = {
+			successMessage: 'Your score was successfully saved to the database.'
+		}
+    res.send(success)
   })
   .catch(error => {
+		let failure = {
+			failureMessage: 'Your score could not be saved to the database.'
+		}
     console.log(error, 'not working.. this far')
-    res.status(400).send('unable to save to database.')
+    res.status(400).send(failure)
   })
 })
 
-app.listen(3000, () => console.log('listening on port 3000!'))
+app.listen(80, () => console.log('listening on port 80!'))

@@ -2,33 +2,34 @@ extends layout
 
 block content
 
-  h1 Highscores
-  .highscore-text
-    h3 Easy
-    h3 Medium
-    h3 Hard
-    h3 Redonk
-  .highscore-container
-    ol
-      for item in highscores.easy
-        li= item.player 
-        p Score 
-          span= item.score
-    ol
-      for item in highscores.medium
-        li= item.player 
-        p Score 
-          span= item.score
-    ol
-      for item in highscores.hard
-        li= item.player 
-        p Score 
-          span= item.score
-    ol
-      for item in highscores.redonk
-        li= item.player 
-        p Score 
-          span= item.score
-    
-  a(href="/")
-    button.home-button-highscore Go Home
+  .highscore-site-container
+    h1 Highscores
+    .highscore-text
+      h3 Easy
+      h3 Medium
+      h3 Hard
+      h3 Redonk
+    .highscore-container
+      ol
+        for item in highscores.easy
+          li= item.player 
+          p Score 
+            span= item.score
+      ol
+        for item in highscores.medium
+          li= item.player 
+          p Score 
+            span= item.score
+      ol
+        for item in highscores.hard
+          li= item.player 
+          p Score 
+            span= item.score
+      ol
+        for item in highscores.redonk
+          li= item.player 
+          p Score 
+            span= item.score
+      
+    a(href="/")
+      button.home-button-highscore Go Home

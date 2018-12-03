@@ -1,6 +1,7 @@
 const body = document.body
 const cardContainer = document.querySelector('.card-container')
 const goblin = document.querySelector('.goblin')
+const highscoreMessage = document.querySelector('.message')
 const win = document.querySelector('.win')
 const clickCounter = document.querySelector('.click-counter')
 const topHeader = document.querySelector('.top-header')
@@ -281,7 +282,20 @@ const saveNewPlayerHighscore = (player, score, level) => {
       'Content-Type': 'application/json',
     },
 	})
-	.then((response) => console.log(response))
+	.then(function(response) {
+		if(response.status >= 400) {
+			console.log('Something went wrong when saving you score to the database.')
+		}else {
+			return response.json()
+		}
+	})
+	.then(function(message) {
+		highscoreMessage.style.display = 'flex'
+		highscoreMessage.textContent = JSON.stringify(message.message)
+		setTimeout(() => {
+			highscoreMessage.style.display = 'none'
+		}, 2000)
+	})
 }
 
 saveHighScoreButton.addEventListener('click', () => {

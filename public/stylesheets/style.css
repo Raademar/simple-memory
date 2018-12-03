@@ -119,6 +119,18 @@ button:hover {
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+.message {
+	position: absolute;
+	top: 5px;
+	width: 60vw;
+	height: 10vh;
+	background: seagreen;
+	color: white;
+	border-radius: 10px;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
 .goblin {
 	display: none;
 	background: url('../assets/goblin.png');
@@ -152,6 +164,15 @@ button:hover {
 
 /* HIGHSCORES */
 
+.highscore-site-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+.highscore-site-container h1 {
+	align-self: center;
+}
 .highscore-container {
 	height: 50vh;
 	width: 100vw;
@@ -164,15 +185,14 @@ button:hover {
 	display: flex;
 	justify-content: space-around;
 }
-.highscore-container table {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-}
-
 ol li {
 	margin-right: 10px;
+}
+ol p {
+	margin-bottom: 50px;
+}
+.highscore-site-container a {
+	align-self: center;
 }
 
 /* ********** */
