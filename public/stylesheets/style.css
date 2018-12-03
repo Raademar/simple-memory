@@ -171,12 +171,12 @@ button:hover {
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
+	height: 100vh;
 }
 .highscore-site-container h1 {
 	align-self: center;
 }
 .highscore-container {
-	height: 50vh;
 	width: 100vw;
 	display: flex;
 	justify-content: space-around;
