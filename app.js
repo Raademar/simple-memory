@@ -44,7 +44,8 @@ let Highscore = require('./db/highscore')
 async function getEasyHighscores() {
   const easyHighscores = await Highscore
     .find({ level : 'easy' })
-    .sort('score')
+		.sort('score')
+		.limit(5)
   if(!easyHighscores) {
     console.log('No Moods registered.')
   }
@@ -53,7 +54,8 @@ async function getEasyHighscores() {
 async function getMediumHighscores() {
   const mediumHighscores = await Highscore
     .find({ level : 'medium' })
-    .sort('score')
+		.sort('score')
+		.limit(5)
   if(!mediumHighscores) {
     console.log('No Moods registered.')
   }
@@ -62,7 +64,8 @@ async function getMediumHighscores() {
 async function getHardHighscores() {
   const hardHighscores = await Highscore
     .find({ level : 'hard' })
-    .sort('score')
+		.sort('score')
+		.limit(5)
   if(!hardHighscores) {
     console.log('No Moods registered.')
   }
@@ -71,7 +74,8 @@ async function getHardHighscores() {
 async function getRedonkHighscores() {
   const redonkHighscores = await Highscore
     .find({ level : 'redonk' })
-    .sort('score')
+		.sort('score')
+		.limit(5)
   if(!redonkHighscores) {
     console.log('No Moods registered.')
   }

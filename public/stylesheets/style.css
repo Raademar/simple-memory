@@ -156,21 +156,24 @@ button:hover {
 	height: 50vh;
 	width: 100vw;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-content: center;
 	flex-flow: row wrap;
 }
+.highscore-text {
+	display: flex;
+	justify-content: space-around;
+}
 .highscore-container table {
-
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 }
-/* .highscore-container h2 {
-	align-self: flex-start;
-	margin-top: 15vh;
-} */
+
+ol li {
+	margin-right: 10px;
+}
 
 /* ********** */
 

@@ -3,52 +3,32 @@ extends layout
 block content
 
   h1 Highscores
+  .highscore-text
+    h3 Easy
+    h3 Medium
+    h3 Hard
+    h3 Redonk
   .highscore-container
     ol
       for item in highscores.easy
-        li(style='margin-right: 1px;')= item.player 
+        li= item.player 
+        p Score 
           span= item.score
-
-
-
-    table
-      thead
-        tr
-          th Name
-          th Score
-      tbody
-        tr
-          td
-            for item in highscores.medium
-              p= item.player
-          td
-            for item in highscores.medium
-              p= item.score
-    table
-      thead
-        tr
-          th Name
-          th Score
-      tbody
-        tr
-          td
-            for item in highscores.hard
-              p= item.player
-          td
-            for item in highscores.hard
-              p= item.score
-    table
-      thead
-        tr
-          th Name
-          th Score
-      tbody
-        tr
-          td
-            for item in highscores.redonk
-              p= item.player
-          td
-            for item in highscores.redonk
-              p= item.score
+    ol
+      for item in highscores.medium
+        li= item.player 
+        p Score 
+          span= item.score
+    ol
+      for item in highscores.hard
+        li= item.player 
+        p Score 
+          span= item.score
+    ol
+      for item in highscores.redonk
+        li= item.player 
+        p Score 
+          span= item.score
+    
   a(href="/")
     button.home-button-highscore Go Home
