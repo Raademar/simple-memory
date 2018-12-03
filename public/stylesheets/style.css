@@ -115,9 +115,10 @@ button:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad0000', endColorstr='#6b0000', GradientType=1 );
 }
 .redonk-bg {
-	background: url('https://i.giphy.com/media/2dnGHOAQt1tIziib5X/giphy.webp');
+	background: url('https://i.imgur.com/O8EtwPp.gif');
 	background-size: cover;
 	background-repeat: no-repeat;
+	background-position: center;
 }
 .message {
 	position: absolute;
@@ -179,7 +180,6 @@ button:hover {
 	display: flex;
 	justify-content: space-around;
 	align-content: center;
-	flex-flow: row wrap;
 }
 .highscore-text {
 	display: flex;
