@@ -30,7 +30,7 @@ body {
 	height: 12vh;
 	margin: 10px;
 	border: 2px solid black;
-	background: orange;
+	background: #ffa500;
 	font-size: 3rem;
 	user-select: none;
 	-moz-user-select: -moz-none;
@@ -135,8 +135,8 @@ button:hover {
 }
 .goblin {
 	display: none;
-	background: url('../assets/goblin.png');
-	background-size: cover;
+	background: url('../assets/goblin_text.png');
+	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
 	z-index: 999;
