@@ -27,8 +27,7 @@ node app.js
 
 #### If everything is working you should see something like the picture below
 
-![screenshot_of_game]
-(https://i.imgur.com/1RbkqI5.png)
+![screenshot_of_game](https://i.imgur.com/1RbkqI5.png)
 
 ## Built With
 
