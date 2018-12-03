@@ -23,7 +23,7 @@ MONGOLAB_URI="mongodb://USERNAME:PASSOWRD@DATABASE.mlab.com:PORT/simple-memory"
 ```
 node app.js
 ```
-* If your console says that the database is connected you can navigate to http://localhost:3000.
+* If your console says that the database is connected you can navigate to http://localhost:80.
 
 #### If everything is working you should see something like the picture below
 
